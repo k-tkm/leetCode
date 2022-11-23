@@ -6,7 +6,7 @@
 
 // @lc code=start
 function romanToInt(s: string): number {
-  const symbols = {
+  const symbols: { [key: string]: number } = {
     I: 1,
     V: 5,
     X: 10,
@@ -17,12 +17,12 @@ function romanToInt(s: string): number {
   };
 
   const replaceStr = (str: string) => {
-    str.replace("IV", "IIII");
-    str.replace("IX", "VIIII");
-    str.replace("XL", "XXXX");
-    str.replace("XC", "LXXXX");
-    str.replace("CD", "CCCC");
-    str.replace("CM", "DCCCC");
+    str = str.replace("IV", "IIII");
+    str = str.replace("IX", "VIIII");
+    str = str.replace("XL", "XXXX");
+    str = str.replace("XC", "LXXXX");
+    str = str.replace("CD", "CCCC");
+    str = str.replace("CM", "DCCCC");
     return str;
   };
 
