@@ -6,42 +6,32 @@
 
 // @lc code=start
 
-const commonPrefix = (left: string, right: string) => {
-  const min = Math.min(left.length, right.length);
-  for (let i = 0; i < min; i++) {
-    if (left.charAt(i) !== right.charAt(i)) {
-      return left.substring(0, i);
+const isCommonPrefix = (strs: string[], len: number): boolean => {
+  const str1 = strs[0].substring(0, len);
+  for (let i = 1; i < strs.length; i++) {
+    if (!strs[i].startsWith(str1)) {
+      return false;
     }
   }
-  return left.substring(0, min);
-};
-
-const longestCommonPrefixByDividedAndConquer = (
-  strs: string[],
-  left: number,
-  right: number
-): string => {
-  console.log(left, right);
-  if (left === right) {
-    return strs[left];
-  }
-  let mid = Math.floor((left + right) / 2);
-  const lcpLeft: string = longestCommonPrefixByDividedAndConquer(
-    strs,
-    left,
-    mid
-  );
-  const lcpRight: string = longestCommonPrefixByDividedAndConquer(
-    strs,
-    mid + 1,
-    right
-  );
-  return commonPrefix(lcpLeft, lcpRight);
+  return true;
 };
 
 function longestCommonPrefix(strs: string[]): string {
   if (strs.length === 0) "";
-  return longestCommonPrefixByDividedAndConquer(strs, 0, strs.length - 1);
+  let minLen = Number.MAX_VALUE;
+  for (const str of strs) {
+    minLen = Math.min(minLen, str.length);
+  }
+  let low = 1;
+  let high = minLen;
+  while (low <= high) {
+    const middle = (low + high) / 2;
+    if (isCommonPrefix(strs, middle)) {
+      low = middle + 1;
+    } else {
+      high = middle - 1;
+    }
+  }
+  return strs[0].substring(0, (low + high) / 2);
 }
-// longestCommonPrefix(["flower", "flow", "flight"]);
 // @lc code=end
