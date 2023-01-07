@@ -37,11 +37,9 @@ function mergeTwoLists(
 
   if (list1.val < list2.val) {
     list1.next = mergeTwoLists(list1.next, list2);
-    console.log("call top", list1, list2);
     return list1;
   } else {
     list2.next = mergeTwoLists(list1, list2.next);
-    console.log("call bottom", list2);
     return list2;
   }
 }
